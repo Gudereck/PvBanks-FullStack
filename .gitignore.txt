@@ -1,0 +1,20 @@
+# Front-end (Angular)
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+
+# Back-end (Java/Spring)
+backend/target/
+backend/build/
+backend/.gradle/
+backend/bin/
+
+# IDEs e SO
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
