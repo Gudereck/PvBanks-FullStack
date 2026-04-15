@@ -1,0 +1,53 @@
+<p>
+<div class="dashboard-container">
+    <h1>Visão Geral</h1>
+
+    <div class="cards-grid">
+        <div class="card receita">
+            <h3>Receitas</h3>
+            <p>{{ resumo.totalReceitas | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+        </div>
+
+        <div class="card despesa">
+            <h3>Despesas</h3>
+            <p>{{ resumo.totalDespesas | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+        </div>
+
+        <div class="card saldo">
+            <h3>Saldo Total</h3>
+            <p>{{ resumo.saldoTotal | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+        </div>
+    </div>
+    <div class="tabela-container">
+        <h2>Histórico de Transações</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let t of transacoes">
+                    <td>{{ t.descricao }}</td>
+                    <td>{{ t.categoria }}</td>
+                    <td>{{ t.data | date:'dd/MM/yyyy' }}</td>
+
+                    <td [ngClass]="t.tipo === 'RECEITA' ? 'texto-verde' : 'texto-vermelho'">
+                        {{ (t.tipo === 'RECEITA' ? '+' : '-') }} {{ t.valor | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="dashboard-container">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Visão Geral</h1>
+            <a routerLink="/nova"
+                style="background-color: #2196f3; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold;">+
+                Nova Transação</a>
+        </div>
+    </div>

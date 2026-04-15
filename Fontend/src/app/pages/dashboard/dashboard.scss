@@ -1,0 +1,107 @@
+.dashboard-container {
+    min-height: 100vh;
+    background-color: #121212;
+    /* Fundo escuro */
+    color: #ffffff;
+    padding: 40px;
+    font-family: sans-serif;
+
+    h1 {
+        margin-bottom: 30px;
+        color: #e0e0e0;
+    }
+}
+
+.cards-grid {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background-color: #1e1e1e;
+    /* Card um pouco mais claro que o fundo */
+    padding: 20px 30px;
+    border-radius: 10px;
+    flex: 1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+    h3 {
+        margin: 0;
+        font-size: 14px;
+        color: #a0a0a0;
+        text-transform: uppercase;
+    }
+
+    p {
+        margin: 10px 0 0;
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    &.receita p {
+        color: #4caf50;
+    }
+
+    /* Verde para receita */
+    &.despesa p {
+        color: #f44336;
+    }
+
+    /* Vermelho para despesa */
+    &.saldo p {
+        color: #2196f3;
+    }
+
+    /* Azul para saldo */
+
+}
+
+/* --- Estilos da Tabela --- */
+.tabela-container {
+    margin-top: 40px;
+    background-color: #1e1e1e;
+    /* Mesma cor dos cards */
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+    h2 {
+        margin-top: 0;
+        color: #e0e0e0;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+
+        th {
+            color: #a0a0a0;
+            text-transform: uppercase;
+            font-size: 14px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+            /* Linha sutil separando o cabeçalho */
+        }
+
+        td {
+            padding: 15px 0;
+            border-bottom: 1px solid #2a2a2a;
+            color: #cccccc;
+            font-size: 15px;
+        }
+
+        /* Cores dinâmicas para os valores */
+        .texto-verde {
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .texto-vermelho {
+            color: #f44336;
+            font-weight: bold;
+        }
+    }
+}

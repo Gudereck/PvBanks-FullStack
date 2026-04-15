@@ -1,0 +1,81 @@
+.form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #1e1e1e;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-family: sans-serif;
+
+    h2 {
+        margin-top: 0;
+        color: #e0e0e0;
+        margin-bottom: 25px;
+    }
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100%;
+
+    label {
+        font-size: 14px;
+        color: #a0a0a0;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+    }
+
+    input,
+    select {
+        background-color: #2a2a2a;
+        border: 1px solid #444;
+        color: #fff;
+        padding: 12px;
+        border-radius: 6px;
+        font-size: 16px;
+        outline: none;
+
+        &:focus {
+            border-color: #2196f3;
+        }
+    }
+}
+
+.linha-dupla {
+    display: flex;
+    gap: 20px;
+}
+
+.botoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 10px;
+
+    button {
+        padding: 12px 24px;
+        border-radius: 6px;
+        border: none;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: opacity 0.2s;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    .btn-cancelar {
+        background-color: transparent;
+        color: #a0a0a0;
+    }
+
+    .btn-salvar {
+        background-color: #4caf50;
+        color: white;
+    }
+}
