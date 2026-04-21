@@ -1,26 +1,40 @@
-<p>
 <div class="dashboard-container">
-    <h1>Visão Geral</h1>
+    <div class="header-main">
+        <h1>Visão Geral</h1>
+        <a routerLink="/nova" class="btn-novo">+ Nova Transação</a>
+    </div>
 
     <div class="cards-grid">
         <div class="card receita">
             <h3>Receitas</h3>
-            <p>{{ resumo.totalReceitas | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+            <p>{{ resumo.totalReceitas | currency:'BRL' }}</p>
         </div>
-
         <div class="card despesa">
             <h3>Despesas</h3>
-            <p>{{ resumo.totalDespesas | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+            <p>{{ resumo.totalDespesas | currency:'BRL' }}</p>
         </div>
-
         <div class="card saldo">
             <h3>Saldo Total</h3>
-            <p>{{ resumo.saldoTotal | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+            <p>{{ resumo.saldoTotal | currency:'BRL' }}</p>
         </div>
     </div>
-    <div class="tabela-container">
-        <h2>Histórico de Transações</h2>
 
+    <div class="row mt-4">
+        <div class="col-grafico">
+            <div class="card bg-dark p-3">
+                <h5 class="text-center">Gastos por Categoria</h5>
+                <div style="height: 250px;">
+                    <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tabela-container mt-4">
+        <div class="table-header">
+            <h2>Histórico</h2>
+            <input type="text" placeholder="Buscar..." [(ngModel)]="termoBusca" (input)="filtrar()" class="busca-input">
+        </div>
         <table>
             <thead>
                 <tr>
@@ -28,26 +42,23 @@
                     <th>Categoria</th>
                     <th>Data</th>
                     <th>Valor</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let t of transacoes">
+                <tr *ngFor="let t of transacoesFiltradas">
                     <td>{{ t.descricao }}</td>
                     <td>{{ t.categoria }}</td>
                     <td>{{ t.data | date:'dd/MM/yyyy' }}</td>
-
                     <td [ngClass]="t.tipo === 'RECEITA' ? 'texto-verde' : 'texto-vermelho'">
-                        {{ (t.tipo === 'RECEITA' ? '+' : '-') }} {{ t.valor | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+                        {{ t.tipo === 'RECEITA' ? '+' : '-' }} {{ t.valor | currency:'BRL' }}
+                    </td>
+                    <td>
+                        <button (click)="editarTransacao(t)" class="btn-link">✏️</button>
+                        <button (click)="excluirTransacao(t.id)" class="btn-link red">🗑️</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div class="dashboard-container">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h1>Visão Geral</h1>
-            <a routerLink="/nova"
-                style="background-color: #2196f3; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold;">+
-                Nova Transação</a>
-        </div>
-    </div>
+</div>

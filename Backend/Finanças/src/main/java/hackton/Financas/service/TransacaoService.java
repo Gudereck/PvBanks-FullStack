@@ -28,9 +28,17 @@ public class TransacaoService {
         return repository.save(transacaoAtualizada);
     }
 
-    public void deletar(String id) {
+    public boolean deletar(String id) {
+        // Verifica se o ID existe usando o seu repository (a variável com letra minúscula)
+        if (!repository.existsById(id)) {
+            return false; // Retorna falso se não achar no MongoDB
+        }
+
+        // Se existir, apaga e retorna verdadeiro para o Controller
         repository.deleteById(id);
+        return true;
     }
+
     public ResumoFinanceiroDTO obterResumo() {
         // Busca todos os ingredientes na despensa (MongoDB)
         List<Transacao> todasTransacoes = repository.findAll();
@@ -49,5 +57,12 @@ public class TransacaoService {
         Double saldo = receitas - despesas;
 
         return new ResumoFinanceiroDTO(receitas, despesas, saldo);
+    }
+    public Transacao atulizar(String id, Transacao transacaoAtualizado){
+        if (repository.existsById(id)){
+            transacaoAtualizado.setId(id);
+            return repository.save(transacaoAtualizado);
+        }
+        return null;
     }
 }

@@ -24,18 +24,46 @@ export class NovaTransacao {
   private router = inject(Router);
 
   salvar(): void {
-    this.transacaoService.salvar(this.transacao).subscribe({
-      next: () => {
-        this.router.navigate(['/']);
-      },
-      error: (erro: any) => {
-        console.error('Erro ao salvar', erro);
-        alert('Erro ao salvar transação. Verifique o console.');
-      }
-    });
-  } // <-- Chave fechando o salvar() corretamente aqui
+    // Verifica se a transação já tem um ID (ou seja, é uma Edição)
+    if (this.transacao.id) {
+
+      // Cenário 1: ATUALIZAR (PUT)
+      this.transacaoService.atualizarTransacao(this.transacao.id, this.transacao).subscribe({
+        next: () => {
+          this.router.navigate(['/']); // Volta para o Dashboard
+        },
+        error: (erro: any) => {
+          console.error('Erro ao atualizar', erro);
+          alert('Erro ao atualizar transação. Verifique o console.');
+        }
+      });
+
+    } else {
+
+      // Cenário 2: CRIAR NOVO (POST)
+      this.transacaoService.salvar(this.transacao).subscribe({
+        next: () => {
+          this.router.navigate(['/']); // Volta para o Dashboard
+        },
+        error: (erro: any) => {
+          console.error('Erro ao salvar', erro);
+          alert('Erro ao salvar transação. Verifique o console.');
+        }
+      });
+
+    }
+  }// <-- Chave fechando o salvar() corretamente aqui
 
   cancelar(): void {
     this.router.navigate(['/']);
+  }
+  ngOnInit(): void {
+    // "Desempacota" os dados enviados pelo botão Editar do Dashboard
+    const state = history.state;
+
+    // Se existir a bagagem 'dadosParaEditar', preenchemos o formulário!
+    if (state && state.dadosParaEditar) {
+      this.transacao = state.dadosParaEditar;
+    }
   }
 }

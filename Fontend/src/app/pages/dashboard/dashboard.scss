@@ -105,3 +105,12 @@
         }
     }
 }
+
+.card {
+    border-radius: 12px;
+    transition: transform 0.2s;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+}

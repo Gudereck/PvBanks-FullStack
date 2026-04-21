@@ -1,5 +1,6 @@
 package hackton.Financas.model;
 
+import hackton.Financas.Repository.TransacaoRepository;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -28,6 +29,7 @@ public class Transacao {
     }
 
     public double getValor() {
-        return valor;
+        return this.valor != null ? this.valor: 0.0;
     }
+
 }
