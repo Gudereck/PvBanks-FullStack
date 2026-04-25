@@ -1,0 +1,63 @@
+/* header.component.scss */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 5%;
+    background: rgba(15, 17, 26, 0.7); /* Fundo alinhado com o dashboard */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #3b82f6; /* Azul premium para combinar com os gradientes do dashboard */
+        letter-spacing: -0.02em;
+        cursor: pointer;
+
+        span {
+            color: #f8fafc;
+            font-weight: 500;
+        }
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        color: #cbd5e1;
+        font-size: 0.95rem;
+
+        strong {
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+            }
+        }
+    }
+}

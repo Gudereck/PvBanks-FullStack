@@ -1,10 +1,11 @@
+<app-header></app-header>
+
 <div class="dashboard-container">
-    <div class="header-main">
+    <header class="header-main">
         <h1>Visão Geral</h1>
         <a routerLink="/nova" class="btn-novo">+ Nova Transação</a>
-    </div>
-
-    <div class="cards-grid">
+    </header>
+    <section class="cards-grid" aria-label="Resumo financeiro">
         <div class="card receita">
             <h3>Receitas</h3>
             <p>{{ resumo.totalReceitas | currency:'BRL' }}</p>
@@ -17,24 +18,54 @@
             <h3>Saldo Total</h3>
             <p>{{ resumo.saldoTotal | currency:'BRL' }}</p>
         </div>
-    </div>
+    </section>
 
-    <div class="row mt-4">
+    <section class="row mt-4" aria-label="Gráfico de gastos">
         <div class="col-grafico">
             <div class="card bg-dark p-3">
-                <h5 class="text-center">Gastos por Categoria</h5>
-                <div style="height: 250px;">
+                <h2 class="text-center">Gastos por Categoria</h2>
+                <div class="grafico-container" style="height: 250px;">
                     <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions"></canvas>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="tabela-container mt-4">
+    <!-- Adicione este section após o gráfico -->
+    <section class="row mt-4" aria-label="Comparativo de gastos">
+        <div class="col-12">
+            <div class="card bg-dark p-3">
+                <h2 class="text-center mb-3">Ritmo de Gastos</h2>
+                <div class="ritmo-container">
+                    <div class="ritmo-comparativo">
+                        <span class="ritmo-seta" [class.positivo]="percentualComparativo > 0"
+                            [class.negativo]="percentualComparativo < 0">
+                            {{ percentualComparativo > 0 ? '▲' : '▼' }}
+                        </span>
+                        <span class="ritmo-percentual">
+                            {{ percentualComparativo | number:'1.0-0' }}%
+                        </span>
+                    </div>
+                    <p class="ritmo-descricao">
+                        em comparação com o mês passado
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tabela-container mt-4" aria-label="Histórico de transações">
         <div class="table-header">
             <h2>Histórico</h2>
-            <input type="text" placeholder="Buscar..." [(ngModel)]="termoBusca" (input)="filtrar()" class="busca-input">
+            <div class="filtros" role="search">
+                <input type="month" [(ngModel)]="mesAnoFiltro" (change)="filtrar()" class="busca-input"
+                    aria-label="Filtrar por mês e ano" title="Filtrar por Mês e Ano" />
+
+                <input type="text" placeholder="Buscar transação..." [(ngModel)]="termoBusca" (input)="filtrar()"
+                    class="busca-input" aria-label="Buscar transação" />
+            </div>
         </div>
+
         <table>
             <thead>
                 <tr>
@@ -54,11 +85,28 @@
                         {{ t.tipo === 'RECEITA' ? '+' : '-' }} {{ t.valor | currency:'BRL' }}
                     </td>
                     <td>
-                        <button (click)="editarTransacao(t)" class="btn-link">✏️</button>
-                        <button (click)="excluirTransacao(t.id)" class="btn-link red">🗑️</button>
+                        <button (click)="editarTransacao(t)" class="btn-link" type="button"
+                            aria-label="Editar transação">
+                            ✏️
+                        </button>
+                        <button (click)="excluirTransacao(t.id)" class="btn-link red" type="button"
+                            aria-label="Excluir transação">
+                            🗑️
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
+    </section>
+    <div class="card-ritmo">
+        <span class="titulo-ritmo">RITMO DE GASTOS</span>
+        <h2 class="valor-principal">R$ {{ valorDiferenca | number:'1.2-2' }} <span>acima</span></h2>
+
+        <div class="badge-comparativo" [ngClass]="{'positivo': percentualComparativo > 0}">
+            <span class="seta">↗</span>
+            {{ percentualComparativo | number:'1.1-1' }}%
+            <span class="vs-texto">vs R$ {{ totalMesPassado }} mês anterior</span>
+        </div>
     </div>
+
 </div>

@@ -1,46 +1,49 @@
 <div class="form-container">
-    <h2>Nova Transação</h2>
+    <header class="form-header">
+        <h2>Nova Transação</h2>
+    </header>
 
-    <form (ngSubmit)="salvar()">
-
-        <div class="campo">
-            <label>Descrição</label>
-            <input type="text" name="descricao" [(ngModel)]="transacao.descricao" required
-                placeholder="Ex: Conta de Luz">
-        </div>
-
-        <div class="linha-dupla">
+    <form (ngSubmit)="salvar()" class="form-card" aria-label="Formulário de nova transação">
+        <section class="form-body">
             <div class="campo">
-                <label>Valor (R$)</label>
-                <input type="number" name="valor" [(ngModel)]="transacao.valor" required step="0.01">
+                <label for="descricao">Descrição</label>
+                <input id="descricao" type="text" name="descricao" [(ngModel)]="transacao.descricao" required
+                    placeholder="Ex: Conta de Luz" />
             </div>
 
-            <div class="campo">
-                <label>Data</label>
-                <input type="date" name="data" [(ngModel)]="transacao.data" required>
-            </div>
-        </div>
+            <div class="linha-dupla">
+                <div class="campo">
+                    <label for="valor">Valor (R$)</label>
+                    <input id="valor" type="number" name="valor" [(ngModel)]="transacao.valor" required step="0.01"
+                        inputmode="decimal" />
+                </div>
 
-        <div class="linha-dupla">
-            <div class="campo">
-                <label>Tipo</label>
-                <select name="tipo" [(ngModel)]="transacao.tipo">
-                    <option value="RECEITA">Receita</option>
-                    <option value="DESPESA">Despesa</option>
-                </select>
+                <div class="campo">
+                    <label for="data">Data</label>
+                    <input id="data" type="date" name="data" [(ngModel)]="transacao.data" required />
+                </div>
             </div>
 
-            <div class="campo">
-                <label>Categoria</label>
-                <input type="text" name="categoria" [(ngModel)]="transacao.categoria" required
-                    placeholder="Ex: Moradia">
-            </div>
-        </div>
+            <div class="linha-dupla">
+                <div class="campo">
+                    <label for="tipo">Tipo</label>
+                    <select id="tipo" name="tipo" [(ngModel)]="transacao.tipo">
+                        <option value="RECEITA">Receita</option>
+                        <option value="DESPESA">Despesa</option>
+                    </select>
+                </div>
 
-        <div class="botoes">
+                <div class="campo">
+                    <label for="categoria">Categoria</label>
+                    <input id="categoria" type="text" name="categoria" [(ngModel)]="transacao.categoria" required
+                        placeholder="Ex: Moradia" />
+                </div>
+            </div>
+        </section>
+
+        <footer class="botoes">
             <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
             <button type="submit" class="btn-salvar">Salvar Transação</button>
-        </div>
-
+        </footer>
     </form>
 </div>

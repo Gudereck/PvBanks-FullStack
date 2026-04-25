@@ -1,81 +1,127 @@
 .form-container {
-    max-width: 600px;
-    margin: 40px auto;
-    background-color: #1e1e1e;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    max-width: 720px;
+    margin: 28px auto;
+    padding: 0 16px;
     color: #fff;
     font-family: sans-serif;
+}
+
+.form-header {
+    margin-bottom: 12px;
 
     h2 {
-        margin-top: 0;
+        margin: 0;
         color: #e0e0e0;
-        margin-bottom: 25px;
+        font-size: 22px;
+        letter-spacing: 0.2px;
     }
+}
+
+.form-card {
+    background-color: #1e1e1e;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.form-body {
+    display: grid;
+    gap: 14px;
 }
 
 .campo {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
     width: 100%;
 
     label {
-        font-size: 14px;
+        font-size: 12px;
         color: #a0a0a0;
         margin-bottom: 8px;
         text-transform: uppercase;
+        letter-spacing: 0.8px;
     }
 
     input,
     select {
         background-color: #2a2a2a;
-        border: 1px solid #444;
+        border: 1px solid #3a3a3a;
         color: #fff;
-        padding: 12px;
-        border-radius: 6px;
-        font-size: 16px;
+        padding: 12px 12px;
+        border-radius: 10px;
+        font-size: 15px;
         outline: none;
+        transition: box-shadow 0.12s ease, border-color 0.12s ease;
 
         &:focus {
-            border-color: #2196f3;
+            border-color: rgba(33, 150, 243, 0.85);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.18);
         }
+    }
+
+    input::placeholder {
+        color: rgba(255, 255, 255, 0.55);
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+        cursor: pointer;
     }
 }
 
 .linha-dupla {
-    display: flex;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
 }
 
 .botoes {
     display: flex;
     justify-content: flex-end;
-    gap: 15px;
-    margin-top: 10px;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 
     button {
         padding: 12px 24px;
-        border-radius: 6px;
+        border-radius: 10px;
         border: none;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: bold;
         cursor: pointer;
-        transition: opacity 0.2s;
+        transition: transform 0.12s ease, opacity 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
 
         &:hover {
-            opacity: 0.8;
+            opacity: 0.95;
+            transform: translateY(-1px);
         }
     }
 
     .btn-cancelar {
-        background-color: transparent;
-        color: #a0a0a0;
+        background-color: rgba(255, 255, 255, 0.04);
+        color: #d0d0d0;
     }
 
     .btn-salvar {
         background-color: #4caf50;
         color: white;
+        box-shadow: 0 10px 22px rgba(76, 175, 80, 0.18);
+    }
+}
+
+@media (max-width: 560px) {
+    .linha-dupla {
+        grid-template-columns: 1fr;
+    }
+
+    .botoes {
+        justify-content: stretch;
+        flex-direction: column-reverse;
+    }
+
+    .botoes button {
+        width: 100%;
     }
 }
