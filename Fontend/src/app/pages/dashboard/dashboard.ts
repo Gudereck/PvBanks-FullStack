@@ -7,10 +7,9 @@ import { BaseChartDirective } from 'ng2-charts';
 import { TransacaoService } from '../../services/transacao.service';
 import { ResumoFinanceiro, Transacao } from '../../models/transacao.model';
 import { Chart, ChartConfiguration, ChartData, ChartType, registerables } from 'chart.js';
+import { Header } from '../../components/header/header';
 
 Chart.register(...registerables);
-
-import { Header } from '../../components/header/header';
 
 @Component({
   selector: 'app-dashboard',
@@ -43,6 +42,7 @@ export class DashboardComponent implements OnInit {
     this.carregarResumo();
     this.carregarTransacoes();
   }
+
   percentualComparativo: number = 0;
   valorDiferenca: number = 0;
   totalMesPassado: number = 0;
@@ -54,7 +54,8 @@ export class DashboardComponent implements OnInit {
         this.transacoesFiltradas = dados;
         this.atualizarDadosGrafico();
         this.calcularRitmoDeGastos();
-      }
+      },
+      error: (erro) => console.error('Erro ao carregar transações', erro)
     });
   }
 
@@ -158,4 +159,18 @@ export class DashboardComponent implements OnInit {
 
   // Não esqueça de chamar this.calcularRitmoDeGastos() dentro do carregarTransacoes()
   // logo após receber os dados do back-end! [cite: 420]
+  // No dashboard.ts, adicione:
+  public lineChartData: ChartConfiguration['data'] = {
+    datasets: [
+      {
+        data: [65, 59, 80, 81, 56, 55, 40], // Aqui virão seus dados reais de gastos diários
+        label: 'Ritmo Diário',
+        borderColor: '#f37021',
+        backgroundColor: 'rgba(243, 112, 33, 0.2)',
+        fill: true,
+        tension: 0.4 // Deixa a linha "curvada" e elegante
+      }
+    ],
+    labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom']
+  };
 }

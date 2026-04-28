@@ -1,0 +1,37 @@
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>PvBanks</h2>
+        <p style="color: #888; margin-bottom: 20px;">Crie sua conta gratuita</p>
+
+        <form (submit)="registrarUsuario()">
+            <div class="form-group">
+                <label>Nome Completo</label>
+                <input type="text" name="nome" [(ngModel)]="userData.nome" placeholder="Como quer ser chamado?">
+            </div>
+
+            <div class="form-group">
+                <label>E-mail</label>
+                <input type="email" name="email" [(ngModel)]="userData.email" placeholder="seu@email.com">
+            </div>
+
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" name="senha" [(ngModel)]="userData.senha" placeholder="Crie uma senha forte">
+            </div>
+
+            <div class="form-group">
+                <label>Confirmar Senha</label>
+                <input type="password" name="confirmarSenha" [(ngModel)]="userData.confirmarSenha"
+                    placeholder="Repita a senha">
+            </div>
+
+            <button type="submit" class="btn-login">CADASTRAR</button>
+
+            <div style="margin-top: 15px;">
+                <a routerLink="/login" style="color: #ff8a00; text-decoration: none; font-size: 0.9rem;">
+                    Já tenho uma conta. Fazer Login.
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
