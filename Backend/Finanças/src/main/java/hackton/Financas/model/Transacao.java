@@ -1,17 +1,17 @@
 package hackton.Financas.model;
 
-import hackton.Financas.Repository.TransacaoRepository;
+import jakarta.persistence.*; // Importante para o MySQL
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.time.LocalDate;
 
 @Data
-@Document(collection = "transacoes")
+@Entity
+@Table(name = "tb_transacoes")
 public class Transacao {
+
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // Mudamos de String para Long (padrão MySQL) [cite: 339, 721]
 
     private String descricao;
     private Double valor;
@@ -19,17 +19,12 @@ public class Transacao {
     private String tipo;
     private String categoria;
 
-    public void setId(String id) {
-        this.id = id;
+    // A CHAVE DE OURO: Muitas transações pertencem a UM usuário
+    @ManyToOne
+    @JoinColumn(name = "usuario_id") // Nome da coluna no MySQL
+    private Usuario usuario;
+
+    public Double getValor() {
+        return this.valor != null ? this.valor : 0.0; // Proteção contra nulos que já tínhamos [cite: 798]
     }
-
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public double getValor() {
-        return this.valor != null ? this.valor: 0.0;
-    }
-
 }

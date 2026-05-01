@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Financas.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Financas.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Financas.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Financas.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/PvBanks-FullStack.iml" filepath="$PROJECT_DIR$/.idea/PvBanks-FullStack.iml" />
     </modules>
   </component>

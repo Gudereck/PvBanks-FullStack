@@ -1,6 +1,5 @@
 package hackton.Financas.controller;
 
-import hackton.Financas.Repository.TransacaoRepository;
 import hackton.Financas.dto.ResumoFinanceiroDTO;
 import hackton.Financas.model.Transacao;
 import hackton.Financas.service.TransacaoService;
@@ -15,11 +14,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class TransacaoController {
 
-    // 1. APENAS O SERVICE FICA AQUI. O Repository foi embora!
     @Autowired
-    private TransacaoService service;
-
-    // 2. Todos os métodos agora chamam apenas o "service"
+    private TransacaoService service; // Nome da variável é 'service'
 
     @PostMapping
     public Transacao criar(@RequestBody Transacao transacao){
@@ -32,24 +28,22 @@ public class TransacaoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Transacao> atualizarTransacao(@PathVariable String id,@RequestBody Transacao transacaoAtualizada){
-        Transacao transacaoSalva = service.atulizar(id , transacaoAtualizada);
-        if (transacaoSalva != null){
-            return ResponseEntity.ok(transacaoSalva);
+    public ResponseEntity<Transacao> atualizar(@PathVariable Long id, @RequestBody Transacao transacao) {
+        // Correção: usando 'service.' em vez de 'transacaoService.'
+        Transacao atualizada = service.atualizar(id, transacao);
+        if (atualizada != null) {
+            return ResponseEntity.ok(atualizada);
         }
         return ResponseEntity.notFound().build();
     }
 
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarTransacao(@PathVariable String id){
-        boolean deletadoComSucesso = service.deletar(id);
-
-        if (!deletadoComSucesso){
-            return ResponseEntity.notFound().build(); // Retorna Erro 404 se não achar
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        // Correção: usando 'service.' em vez de 'transacaoService.'
+        if (service.deletar(id)) {
+            return ResponseEntity.noContent().build();
         }
-
-        return ResponseEntity.noContent().build(); // Retorna Status 204 se deu tudo certo
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/resumo")
