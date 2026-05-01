@@ -1,5 +1,8 @@
 <app-header></app-header>
 
+<!-- Modal de confirmação (renderiza só quando aberto) -->
+<app-confirm-modal></app-confirm-modal>
+
 <div class="dashboard-container">
     <header class="header-main">
         <h1>Visão Geral</h1>
@@ -31,7 +34,6 @@
         </div>
     </section>
 
-    <!-- Adicione este section após o gráfico -->
     <section class="row mt-4" aria-label="Comparativo de gastos">
         <div class="col-12">
             <div class="card bg-dark p-3">
@@ -98,6 +100,7 @@
             </tbody>
         </table>
     </section>
+
     <div class="card-ritmo">
         <span class="titulo-ritmo">RITMO DE GASTOS</span>
         <h2 class="valor-principal">R$ {{ valorDiferenca | number:'1.2-2' }} <span>acima</span></h2>

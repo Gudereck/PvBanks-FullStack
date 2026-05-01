@@ -1,23 +1,25 @@
+@use 'styles/variables' as *;
+
 .login-container {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: radial-gradient(circle at top right, #2d2d2d, #121212); // Fundo Dark
+    background: radial-gradient(circle at top right, #2d2d2d, $bg-main);
 }
 
 .login-card {
-    background: rgba(255, 255, 255, 0.05); // Efeito de vidro
+    background: $bg-surface;
     backdrop-filter: blur(10px);
     padding: 2.5rem;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $radius-lg;
+    border: 1px solid $card-border;
     width: 100%;
     max-width: 400px;
     text-align: center;
 
     h2 {
-        color: #ff8a00; // Laranja Inter
+        color: $accent;
         margin-bottom: 1.5rem;
         font-weight: bold;
     }
@@ -27,7 +29,7 @@
         text-align: left;
 
         label {
-            color: #ccc;
+            color: $text-muted;
             font-size: 0.9rem;
         }
 
@@ -35,43 +37,75 @@
             width: 100%;
             padding: 12px;
             margin-top: 5px;
-            border-radius: 8px;
-            border: none;
+            border-radius: $radius-sm;
+            border: 1px solid transparent;
             background: rgba(0, 0, 0, 0.3);
-            color: white;
+            color: $text-main;
             outline: none;
+            transition: $transition-fast;
 
             &:focus {
-                border: 1px solid #ff8a00;
+                border-color: $accent;
+                box-shadow: 0 0 0 3px rgba($accent, 0.2);
             }
+        }
+
+        // Feedback visual de erro
+        &.has-error {
+            input {
+                border-color: $danger;
+                box-shadow: 0 0 0 3px $danger-muted;
+            }
+
+            .field-error {
+                display: block;
+                color: #f87171;
+                font-size: 0.8rem;
+                margin-top: 4px;
+            }
+        }
+
+        .field-error {
+            display: none;
         }
     }
 
     .btn-login {
         width: 100%;
         padding: 12px;
-        background: #ff8a00;
-        color: white;
+        background: $accent;
+        color: $text-main;
         border: none;
-        border-radius: 8px;
+        border-radius: $radius-sm;
         font-weight: bold;
         cursor: pointer;
-        transition: 0.3s;
+        transition: $transition-base;
 
         &:hover {
-            background: #e67a00;
+            background: $accent-hover;
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba($accent, 0.4);
+        }
+
+        &:active {
+            transform: translateY(0);
         }
     }
-}
 
-a {
-    color: #ff8a00;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: bold;
-    position: relative; // Garante que ele respeite o empilhamento
-    z-index: 10; // Joga o link para a frente de tudo
-    cursor: pointer; // Força o cursor de clique
-    pointer-events: auto !important; // Garante que ele aceite o mouse
+    .login-footer {
+        margin-top: 15px;
+        color: $text-muted;
+        font-size: 0.9rem;
+
+        a {
+            color: $accent;
+            text-decoration: none;
+            font-weight: bold;
+            transition: $transition-fast;
+
+            &:hover {
+                color: $accent-hover;
+            }
+        }
+    }
 }

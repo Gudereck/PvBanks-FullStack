@@ -1,0 +1,56 @@
+// ============================================================
+//  PvBanks — Design Tokens Globais
+//  Importe este arquivo em todos os componentes:
+//  @use 'src/_variables.scss' as *;
+// ============================================================
+
+
+// --- Paleta Base ---
+$bg-main: #0f111a;
+$bg-surface: rgba(25, 30, 41, 0.6);
+$bg-overlay: rgba(20, 25, 32, 0.85);
+$card-bg: rgba(25, 30, 41, 0.6);
+$card-border: rgba(255, 255, 255, 0.08);
+
+// --- Cores de Marca ---   
+$primary: #3b82f6;
+$primary-hover: #2563eb;
+$primary-glow: rgba(59, 130, 246, 0.5);
+
+$accent: #ff8a00; // laranja login / CTAs secundários
+$accent-hover: #e67a00;
+
+// --- Semântica ---
+$success: #10b981;
+$success-muted: rgba(16, 185, 129, 0.15);
+$danger: #ef4444;
+$danger-muted: rgba(239, 68, 68, 0.15);
+$warning: #f59e0b;
+$warning-muted: rgba(245, 158, 11, 0.15);
+
+// --- Tipografia ---
+$text-main: #f8fafc;
+$text-muted: #94a3b8;
+$text-subtle: rgba(255, 255, 255, 0.3);
+
+// --- Bordas & Raios ---
+$radius-sm: 0.5rem;
+$radius-md: 0.75rem;
+$radius-lg: 1.25rem;
+$radius-xl: 1.5rem;
+$radius-full: 9999px;
+
+// --- Sombras ---
+$shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.15);
+$shadow-md: 0 8px 32px rgba(0, 0, 0, 0.3);
+$shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.4);
+
+// --- Transições ---
+$ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+$transition-fast: all 0.2s $ease-smooth;
+$transition-base: all 0.3s $ease-smooth;
+
+// --- Z-index ---
+$z-modal-backdrop: 1000;
+$z-modal: 1001;
+$z-tooltip: 1100;
