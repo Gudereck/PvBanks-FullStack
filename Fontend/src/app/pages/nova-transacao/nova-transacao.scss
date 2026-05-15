@@ -1,33 +1,39 @@
+@use 'styles/variables' as *;
+
 .form-container {
     max-width: 720px;
     margin: 28px auto;
     padding: 0 16px;
-    color: #fff;
-    font-family: sans-serif;
+    color: $text-main;
+    font-family: 'Inter', sans-serif;
+    animation: fadeIn $transition-base;
 }
 
 .form-header {
-    margin-bottom: 12px;
+    margin-bottom: 1.5rem;
 
     h2 {
         margin: 0;
-        color: #e0e0e0;
-        font-size: 22px;
-        letter-spacing: 0.2px;
+        color: $text-main;
+        font-size: 2rem;
+        font-weight: bold;
+        letter-spacing: -0.01em;
     }
 }
 
 .form-card {
-    background-color: #1e1e1e;
-    padding: 18px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    background: $bg-surface;
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: $radius-lg;
+    border: 1px solid $card-border;
+    box-shadow: $shadow-md;
+    animation: slideUp $transition-base;
 }
 
 .form-body {
     display: grid;
-    gap: 14px;
+    gap: 1.5rem;
 }
 
 .campo {
@@ -36,82 +42,104 @@
     width: 100%;
 
     label {
-        font-size: 12px;
-        color: #a0a0a0;
-        margin-bottom: 8px;
+        font-size: 0.9rem;
+        color: $text-muted;
+        margin-bottom: 0.5rem;
         text-transform: uppercase;
-        letter-spacing: 0.8px;
+        letter-spacing: 0.05em;
+        font-weight: 500;
     }
 
     input,
     select {
-        background-color: #2a2a2a;
-        border: 1px solid #3a3a3a;
-        color: #fff;
-        padding: 12px 12px;
-        border-radius: 10px;
-        font-size: 15px;
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: $text-main;
+        padding: 12px 14px;
+        border-radius: $radius-sm;
+        font-size: 1rem;
         outline: none;
-        transition: box-shadow 0.12s ease, border-color 0.12s ease;
+        transition: $transition-fast;
 
         &:focus {
-            border-color: rgba(33, 150, 243, 0.85);
-            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.18);
+            border-color: $accent;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+            background-color: rgba(255, 255, 255, 0.1);
         }
     }
 
     input::placeholder {
-        color: rgba(255, 255, 255, 0.55);
+        color: $text-subtle;
     }
 
     input[type="date"]::-webkit-calendar-picker-indicator {
-        filter: invert(1);
+        filter: invert(0.8);
         cursor: pointer;
+        opacity: 0.6;
+        transition: opacity 0.2s;
+
+        &:hover {
+            opacity: 1;
+        }
     }
 }
 
 .linha-dupla {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
+    gap: 1.5rem;
 }
 
 .botoes {
     display: flex;
     justify-content: flex-end;
-    gap: 12px;
-    margin-top: 16px;
-    padding-top: 14px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid $card-border;
 
     button {
         padding: 12px 24px;
-        border-radius: 10px;
+        border-radius: $radius-sm;
         border: none;
-        font-size: 15px;
+        font-size: 1rem;
         font-weight: bold;
         cursor: pointer;
-        transition: transform 0.12s ease, opacity 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+        transition: $transition-base;
 
         &:hover {
-            opacity: 0.95;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
     }
 
     .btn-cancelar {
-        background-color: rgba(255, 255, 255, 0.04);
-        color: #d0d0d0;
+        background-color: rgba(255, 255, 255, 0.05);
+        color: $text-muted;
+        border: 1px solid $card-border;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: $text-main;
+        }
     }
 
     .btn-salvar {
-        background-color: #4caf50;
+        background-color: $success;
         color: white;
-        box-shadow: 0 10px 22px rgba(76, 175, 80, 0.18);
+        box-shadow: 0 10px 22px $success-muted;
+
+        &:hover {
+            background-color: #059669;
+            box-shadow: 0 12px 24px rgba($success, 0.3);
+        }
     }
 }
 
 @media (max-width: 560px) {
+    .form-card {
+        padding: 1.5rem;
+    }
+
     .linha-dupla {
         grid-template-columns: 1fr;
     }
@@ -123,5 +151,21 @@
 
     .botoes button {
         width: 100%;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

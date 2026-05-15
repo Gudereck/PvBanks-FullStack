@@ -1,0 +1,73 @@
+<div class="analises-container">
+  <div class="header-main">
+    <div>
+      <h1>Análises Financeiras</h1>
+      <p class="subtitle">Acompanhe seus rendimentos, gastos e metas em detalhes.</p>
+    </div>
+    <button class="btn-novo">
+      <i class="fi fi-rr-download"></i>
+      Exportar Relatório
+    </button>
+  </div>
+
+  <!-- Cards de Resumo Rápido -->
+  <div class="cards-grid">
+    <div class="card receita">
+      <h3>Receitas (Semestre)</h3>
+      <p>R$ {{ resumo.totalReceitas | number:'1.2-2' }}</p>
+    </div>
+    <div class="card despesa">
+      <h3>Despesas (Semestre)</h3>
+      <p>R$ {{ (resumo.totalDespesas < 0 ? -resumo.totalDespesas : resumo.totalDespesas) | number:'1.2-2' }}</p>
+    </div>
+    <div class="card saldo">
+      <h3>Saldo Acumulado</h3>
+      <p>R$ {{ resumo.saldoTotal | number:'1.2-2' }}</p>
+    </div>
+    <div class="card meta-card">
+      <div class="meta-header">
+        <h3>Meta de Gastos Mensal</h3>
+        <span>R$ {{ metaMensal | number:'1.2-2' }}</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" [style.width]="percentualMeta + '%'" [class.perigo]="percentualMeta > 90"></div>
+      </div>
+      <p class="meta-desc">Você já gastou R$ {{ (resumo.totalDespesas < 0 ? -resumo.totalDespesas : resumo.totalDespesas) | number:'1.2-2' }} ({{ percentualMeta | number:'1.0-0' }}%)</p>
+    </div>
+  </div>
+
+  <!-- Gráficos -->
+  <div class="charts-grid">
+    <!-- Gráfico de Barras -->
+    <div class="card chart-card">
+      <div class="chart-header">
+        <h2>Receitas vs. Despesas</h2>
+        <select class="chart-filter">
+          <option>Últimos 6 Meses</option>
+          <option>Este Ano</option>
+        </select>
+      </div>
+      <div class="grafico-container bar-chart">
+        <canvas baseChart
+          [data]="barChartData"
+          [options]="barChartOptions"
+          [type]="barChartType">
+        </canvas>
+      </div>
+    </div>
+
+    <!-- Gráfico de Rosca -->
+    <div class="card chart-card">
+      <div class="chart-header">
+        <h2>Distribuição de Gastos</h2>
+      </div>
+      <div class="grafico-container doughnut-chart">
+        <canvas baseChart
+          [data]="doughnutChartData"
+          [options]="doughnutChartOptions"
+          [type]="doughnutChartType">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

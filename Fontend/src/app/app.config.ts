@@ -10,6 +10,9 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
+// Importações de Gráficos
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+
 // Executa a configuração do idioma
 registerLocaleData(localePt);
 
@@ -18,6 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    provideCharts(withDefaultRegisterables())
   ]
 };

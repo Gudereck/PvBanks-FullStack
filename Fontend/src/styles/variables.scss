@@ -1,24 +1,23 @@
 // ============================================================
-//  PvBanks — Design Tokens Globais
+//  PvBanks — Design Tokens Globais (Light Theme)
 //  Importe este arquivo em todos os componentes:
 //  @use 'src/_variables.scss' as *;
 // ============================================================
 
-
 // --- Paleta Base ---
-$bg-main: #0f111a;
-$bg-surface: rgba(25, 30, 41, 0.6);
-$bg-overlay: rgba(20, 25, 32, 0.85);
-$card-bg: rgba(25, 30, 41, 0.6);
-$card-border: rgba(255, 255, 255, 0.08);
+$bg-main: #050505; // Preto predominante
+$bg-surface: #0f0f0f;
+$bg-overlay: rgba(0, 0, 0, 0.85);
+$card-bg: #121212;
+$card-border: rgba(255, 255, 255, 0.1);
 
-// --- Cores de Marca ---   
-$primary: #3b82f6;
-$primary-hover: #2563eb;
-$primary-glow: rgba(59, 130, 246, 0.5);
+// --- Cores de Marca (Black & White) ---   
+$primary: #ffffff; // Branco como destaque
+$primary-hover: #e5e5e5;
+$primary-glow: rgba(255, 255, 255, 0.2);
 
-$accent: #ff8a00; // laranja login / CTAs secundários
-$accent-hover: #e67a00;
+$accent: #ffffff; 
+$accent-hover: #e5e5e5;
 
 // --- Semântica ---
 $success: #10b981;
@@ -29,9 +28,9 @@ $warning: #f59e0b;
 $warning-muted: rgba(245, 158, 11, 0.15);
 
 // --- Tipografia ---
-$text-main: #f8fafc;
-$text-muted: #94a3b8;
-$text-subtle: rgba(255, 255, 255, 0.3);
+$text-main: #ffffff; // Texto principal branco
+$text-muted: #a1a1aa; // Texto secundário cinza
+$text-subtle: #71717a; // Texto sutil
 
 // --- Bordas & Raios ---
 $radius-sm: 0.5rem;
@@ -41,9 +40,9 @@ $radius-xl: 1.5rem;
 $radius-full: 9999px;
 
 // --- Sombras ---
-$shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.15);
-$shadow-md: 0 8px 32px rgba(0, 0, 0, 0.3);
-$shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.4);
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+$shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.08);
 
 // --- Transições ---
 $ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);

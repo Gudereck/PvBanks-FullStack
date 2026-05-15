@@ -1,115 +1,86 @@
-<app-header></app-header>
+            <header class="header-main">
+                <h1>Painel de Controle Financeiro</h1>
+                <a routerLink="/nova" class="btn-novo">+ Nova Transação</a>
+            </header>
 
-<!-- Modal de confirmação (renderiza só quando aberto) -->
-<app-confirm-modal></app-confirm-modal>
-
-<div class="dashboard-container">
-    <header class="header-main">
-        <h1>Visão Geral</h1>
-        <a routerLink="/nova" class="btn-novo">+ Nova Transação</a>
-    </header>
-    <section class="cards-grid" aria-label="Resumo financeiro">
-        <div class="card receita">
-            <h3>Receitas</h3>
-            <p>{{ resumo.totalReceitas | currency:'BRL' }}</p>
-        </div>
-        <div class="card despesa">
-            <h3>Despesas</h3>
-            <p>{{ resumo.totalDespesas | currency:'BRL' }}</p>
-        </div>
-        <div class="card saldo">
-            <h3>Saldo Total</h3>
-            <p>{{ resumo.saldoTotal | currency:'BRL' }}</p>
-        </div>
-    </section>
-
-    <section class="row mt-4" aria-label="Gráfico de gastos">
-        <div class="col-grafico">
-            <div class="card bg-dark p-3">
-                <h2 class="text-center">Gastos por Categoria</h2>
-                <div class="grafico-container" style="height: 250px;">
-                    <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions"></canvas>
+            <section class="cards-grid" aria-label="Resumo financeiro">
+                <div class="card receita">
+                    <h3>Total de Receitas</h3>
+                    <p>{{ resumo.totalReceitas | currency:'BRL' }}</p>
                 </div>
-            </div>
-        </div>
-    </section>
+                <div class="card despesa">
+                    <h3>Total de Despesas</h3>
+                    <p>{{ resumo.totalDespesas | currency:'BRL' }}</p>
+                </div>
+                <div class="card saldo">
+                    <h3>Saldo Disponível</h3>
+                    <p>{{ resumo.saldoTotal | currency:'BRL' }}</p>
+                </div>
+            </section>
 
-    <section class="row mt-4" aria-label="Comparativo de gastos">
-        <div class="col-12">
-            <div class="card bg-dark p-3">
-                <h2 class="text-center mb-3">Ritmo de Gastos</h2>
-                <div class="ritmo-container">
-                    <div class="ritmo-comparativo">
-                        <span class="ritmo-seta" [class.positivo]="percentualComparativo > 0"
-                            [class.negativo]="percentualComparativo < 0">
-                            {{ percentualComparativo > 0 ? '▲' : '▼' }}
-                        </span>
-                        <span class="ritmo-percentual">
-                            {{ percentualComparativo | number:'1.0-0' }}%
-                        </span>
+            <section class="row mt-4" aria-label="Gráfico de gastos">
+                <div class="col-12">
+                    <div class="card bg-dark">
+                        <h2>Resumo Mensal</h2>
+                        <div class="grafico-container" style="height: 300px;">
+                            <canvas baseChart [data]="barChartData" [type]="barChartType" [options]="barChartOptions"></canvas>
+                        </div>
                     </div>
-                    <p class="ritmo-descricao">
-                        em comparação com o mês passado
-                    </p>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <section class="tabela-container mt-4" aria-label="Histórico de transações">
-        <div class="table-header">
-            <h2>Histórico</h2>
-            <div class="filtros" role="search">
-                <input type="month" [(ngModel)]="mesAnoFiltro" (change)="filtrar()" class="busca-input"
-                    aria-label="Filtrar por mês e ano" title="Filtrar por Mês e Ano" />
+            <section class="tabela-container mt-4" aria-label="Histórico de transações">
+                <div class="table-header">
+                    <h2>Visão Geral de Transações</h2>
+                    <div class="filtros" role="search">
+                        <input
+                            type="month"
+                            [(ngModel)]="mesAnoFiltro"
+                            (change)="filtrar()"
+                            class="busca-input"
+                            aria-label="Filtrar por mês e ano"
+                            title="Filtrar por Mês e Ano"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Buscar transação..."
+                            [(ngModel)]="termoBusca"
+                            (input)="filtrar()"
+                            class="busca-input"
+                            aria-label="Buscar transação"
+                        />
+                    </div>
+                </div>
 
-                <input type="text" placeholder="Buscar transação..." [(ngModel)]="termoBusca" (input)="filtrar()"
-                    class="busca-input" aria-label="Buscar transação" />
-            </div>
-        </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Descrição</th>
-                    <th>Categoria</th>
-                    <th>Data</th>
-                    <th>Valor</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let t of transacoesFiltradas">
-                    <td>{{ t.descricao }}</td>
-                    <td>{{ t.categoria }}</td>
-                    <td>{{ t.data | date:'dd/MM/yyyy' }}</td>
-                    <td [ngClass]="t.tipo === 'RECEITA' ? 'texto-verde' : 'texto-vermelho'">
-                        {{ t.tipo === 'RECEITA' ? '+' : '-' }} {{ t.valor | currency:'BRL' }}
-                    </td>
-                    <td>
-                        <button (click)="editarTransacao(t)" class="btn-link" type="button"
-                            aria-label="Editar transação">
-                            ✏️
-                        </button>
-                        <button (click)="excluirTransacao(t.id)" class="btn-link red" type="button"
-                            aria-label="Excluir transação">
-                            🗑️
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
-    <div class="card-ritmo">
-        <span class="titulo-ritmo">RITMO DE GASTOS</span>
-        <h2 class="valor-principal">R$ {{ valorDiferenca | number:'1.2-2' }} <span>acima</span></h2>
-
-        <div class="badge-comparativo" [ngClass]="{'positivo': percentualComparativo > 0}">
-            <span class="seta">↗</span>
-            {{ percentualComparativo | number:'1.1-1' }}%
-            <span class="vs-texto">vs R$ {{ totalMesPassado }} mês anterior</span>
-        </div>
-    </div>
-
-</div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Data</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let t of transacoesFiltradas">
+                                <td>{{ t.descricao }}</td>
+                                <td>{{ t.categoria }}</td>
+                                <td>{{ t.data | date:'dd/MM/yyyy' }}</td>
+                                <td [ngClass]="t.tipo === 'RECEITA' ? 'texto-verde' : 'texto-vermelho'">
+                                    {{ t.tipo === 'RECEITA' ? '+' : '-' }} {{ t.valor | currency:'BRL' }}
+                                </td>
+                                <td>
+                                    <button (click)="editarTransacao(t)" class="btn-link" type="button" aria-label="Editar transação">
+                                        ✏️
+                                    </button>
+                                    <button (click)="excluirTransacao(t.id)" class="btn-link red" type="button" aria-label="Excluir transação">
+                                        🗑️
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>

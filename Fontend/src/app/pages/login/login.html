@@ -1,7 +1,7 @@
 <div class="login-container">
     <div class="login-card">
         <h2>PvBanks</h2>
-        <p style="color: #888; margin-bottom: 20px;">Acesse sua conta</p>
+        <p class="subtitle">Acesse sua conta</p>
 
         <form (submit)="fazerLogin()">
             <div class="form-group">
@@ -16,10 +16,9 @@
 
             <button type="submit" class="btn-login">ENTRAR</button>
 
-            <div style="margin-top: 15px;">
-                <span style="color: #888; font-size: 0.9rem;">Não tem conta? </span>
-                <a routerLink="/cadastro"
-                    style="color: #ff8a00; text-decoration: none; font-size: 0.9rem; font-weight: bold;">
+            <div class="login-footer">
+                <span>Não tem conta? </span>
+                <a routerLink="/cadastro">
                     Cadastre-se agora.
                 </a>
             </div>

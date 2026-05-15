@@ -1,0 +1,71 @@
+<div class="transacoes-container">
+    <div class="header-main">
+        <div>
+            <h1>Transações</h1>
+            <p class="subtitle">Histórico completo de receitas e despesas.</p>
+        </div>
+        <a routerLink="/nova" class="btn-novo">+ Nova Transação</a>
+    </div>
+
+    <!-- Filtros Avancados -->
+    <div class="filtros-card">
+        <div class="filtros-grid">
+            <div class="filtro-item">
+                <label>Mês / Ano</label>
+                <input type="month" [(ngModel)]="mesAnoFiltro" (change)="filtrar()" class="input-dark">
+            </div>
+            <div class="filtro-item">
+                <label>Tipo</label>
+                <select [(ngModel)]="tipoFiltro" (change)="filtrar()" class="input-dark">
+                    <option value="">Todos os Tipos</option>
+                    <option value="RECEITA">Apenas Entradas (Receitas)</option>
+                    <option value="DESPESA">Apenas Saídas (Despesas)</option>
+                </select>
+            </div>
+            <div class="filtro-item">
+                <label>Pesquisar</label>
+                <input type="text" placeholder="Busque por descrição ou categoria..." [(ngModel)]="termoBusca" (input)="filtrar()" class="input-dark">
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela de Transações -->
+    <div class="tabela-container">
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="transacoesFiltradas.length === 0">
+                        <td colspan="6" class="text-center vazio">Nenhuma transação encontrada.</td>
+                    </tr>
+                    <tr *ngFor="let t of transacoesFiltradas">
+                        <td>{{ t.data | date:'dd/MM/yyyy' }}</td>
+                        <td><strong>{{ t.descricao }}</strong></td>
+                        <td><span class="tag-categoria">{{ t.categoria || 'Sem categoria' }}</span></td>
+                        <td>
+                            <span class="badge" [ngClass]="t.tipo === 'RECEITA' ? 'badge-success' : 'badge-danger'">
+                                {{ t.tipo === 'RECEITA' ? 'Receita' : 'Despesa' }}
+                            </span>
+                        </td>
+                        <td [ngClass]="t.tipo === 'RECEITA' ? 'texto-verde' : 'texto-vermelho'">
+                            {{ t.tipo === 'RECEITA' ? '+' : '-' }} {{ t.valor | currency:'BRL' }}
+                        </td>
+                        <td>
+                            <button (click)="editarTransacao(t)" class="btn-link" title="Editar">✏️</button>
+                            <button (click)="excluirTransacao(t.id)" class="btn-link red" title="Excluir">🗑️</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

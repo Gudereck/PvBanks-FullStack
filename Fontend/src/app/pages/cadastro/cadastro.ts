@@ -15,13 +15,15 @@ export class Cadastro {
     email: '',
     senha: '',
     confirmarSenha: ''
-  };
-
+  }
   private router = inject(Router);
   registrarUsuario() {
     if (this.userData.senha !== this.userData.confirmarSenha) {
       alert('Senhas não conferem')
       return;
     }
+    console.log('Usuário cadastrado:', this.userData);
+    alert('Conta criada com sucesso! Redirecionando para o login...');
+    this.router.navigate(['/login']);
   }
 }

@@ -4,9 +4,13 @@ import hackton.Financas.Repository.TransacaoRepository;
 import hackton.Financas.dto.ResumoFinanceiroDTO;
 import hackton.Financas.model.Transacao;
 
+import hackton.Financas.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.security.Security;
 import java.util.List;
 
 @Service
@@ -16,11 +20,20 @@ public class TransacaoService {
     private TransacaoRepository repository;
 
     public Transacao criar(Transacao transacao) {
+        Usuario usuario = new Usuario();
+        usuario.setId(getUsuarioLogadoId());
+        transacao.setUsuario(usuario);
         return repository.save(transacao);
     }
 
+
+    private Long getUsuarioLogadoId() {
+        var principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ((Usuario) principal).getId();
+    }
+
     public List<Transacao> listarTodas() {
-        return repository.findAll();
+        return repository.findByUsuarioId(getUsuarioLogadoId());
     }
 
     // AQUI ESTÁ A CORREÇÃO: "Long id" em vez de "String id"
@@ -42,20 +55,19 @@ public class TransacaoService {
     }
 
     public ResumoFinanceiroDTO obterResumo() {
-        List<Transacao> todasTransacoes = repository.findAll();
+        List<Transacao> transacoes = repository.findByUsuarioId(getUsuarioLogadoId());
 
-        Double receitas = todasTransacoes.stream()
+        Double receitas = transacoes.stream()
                 .filter(t -> "RECEITA".equalsIgnoreCase(t.getTipo()))
                 .mapToDouble(Transacao::getValor)
                 .sum();
 
-        Double despesas = todasTransacoes.stream()
+        Double despesas = transacoes.stream()
                 .filter(t -> "DESPESA".equalsIgnoreCase(t.getTipo()))
                 .mapToDouble(Transacao::getValor)
                 .sum();
 
-        Double saldo = receitas - despesas;
+        return new ResumoFinanceiroDTO(receitas, despesas, receitas - despesas);
 
-        return new ResumoFinanceiroDTO(receitas, despesas, saldo);
     }
 }

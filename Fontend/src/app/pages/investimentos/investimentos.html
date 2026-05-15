@@ -1,0 +1,138 @@
+<div class="investimentos-container">
+  <div class="header-main">
+    <div>
+      <h1>Meus Investimentos</h1>
+      <p class="subtitle">Acompanhe sua carteira e indicadores do mercado financeiro.</p>
+    </div>
+    <button class="btn-novo">
+      <i class="fi fi-rr-plus"></i>
+      Novo Investimento
+    </button>
+  </div>
+
+  <!-- Indicadores de Mercado (API) -->
+  <div class="indicadores-container">
+    <h2>Indicadores de Mercado</h2>
+    <div class="indicadores-grid">
+      <div class="indicador-card">
+        <div class="ind-icon cdi"><i class="fi fi-rr-chart-line-up"></i></div>
+        <div class="ind-info">
+          <span>Taxa Selic / CDI Atual</span>
+          @if (carregandoTaxa) {
+            <p class="loading-skeleton"></p>
+          } @else {
+            <p>{{ taxaSelic }}% <small>a.a.</small></p>
+            <span class="data-ref">Ref: {{ dataTaxa }}</span>
+          }
+        </div>
+      </div>
+
+      <div class="indicador-card">
+        <div class="ind-icon inflacao"><i class="fi fi-rr-sort-amount-up-alt"></i></div>
+        <div class="ind-info">
+          <span>Rendimento 100% CDI</span>
+          @if (carregandoTaxa) {
+            <p class="loading-skeleton"></p>
+          } @else {
+            <p>~ {{ (taxaSelic * 0.99) | number:'1.2-2' }}% <small>a.a.</small></p>
+            <span class="data-ref">Estimativa</span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cards de Resumo da Carteira -->
+  <div class="cards-grid mt-4">
+    <div class="card saldo">
+      <h3>Patrimônio Total</h3>
+      <p>R$ 45.200,50</p>
+    </div>
+    <div class="card receita">
+      <h3>Rendimento Mensal</h3>
+      <p>+ R$ 420,15</p>
+    </div>
+  </div>
+
+  <!-- Main Content: Gráfico e Lista -->
+  <div class="conteudo-grid">
+    <!-- Gráfico de Alocação -->
+    <div class="card chart-card">
+      <div class="chart-header">
+        <h2>Distribuição da Carteira</h2>
+      </div>
+      <div class="grafico-container doughnut-chart">
+        <canvas baseChart
+          [data]="doughnutChartData"
+          [options]="doughnutChartOptions"
+          [type]="doughnutChartType">
+        </canvas>
+      </div>
+    </div>
+
+    <!-- Lista de Ativos -->
+    <div class="card tabela-card">
+      <div class="chart-header">
+        <h2>Meus Ativos</h2>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>ATIVO</th>
+              <th>TIPO</th>
+              <th>VALOR</th>
+              <th>RENT.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="ativo-nome">
+                  <strong>Tesouro Selic 2029</strong>
+                  <span>Renda Fixa</span>
+                </div>
+              </td>
+              <td>Pós-fixado</td>
+              <td>R$ 15.000,00</td>
+              <td class="texto-verde">+ 10,5%</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ativo-nome">
+                  <strong>CDB Banco Inter 110%</strong>
+                  <span>Renda Fixa</span>
+                </div>
+              </td>
+              <td>Pós-fixado</td>
+              <td>R$ 10.000,00</td>
+              <td class="texto-verde">+ 11,5%</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ativo-nome">
+                  <strong>MXRF11</strong>
+                  <span>FIIs</span>
+                </div>
+              </td>
+              <td>Cota: R$ 10,40</td>
+              <td>R$ 5.200,00</td>
+              <td class="texto-verde">+ 1,1% /mês</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ativo-nome">
+                  <strong>PETR4</strong>
+                  <span>Ações</span>
+                </div>
+              </td>
+              <td>Cota: R$ 38,20</td>
+              <td>R$ 15.000,50</td>
+              <td class="texto-vermelho">- 2,3%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

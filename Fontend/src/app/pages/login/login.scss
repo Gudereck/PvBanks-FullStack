@@ -5,7 +5,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: radial-gradient(circle at top right, #2d2d2d, $bg-main);
+    background: radial-gradient(circle at top right, #1a1a1a 0%, $bg-main 100%);
+    animation: fadeIn $transition-base;
 }
 
 .login-card {
@@ -17,11 +18,20 @@
     width: 100%;
     max-width: 400px;
     text-align: center;
+    box-shadow: $shadow-md;
+    animation: slideUp $transition-base;
 
     h2 {
         color: $accent;
-        margin-bottom: 1.5rem;
+        margin-bottom: 0.5rem;
         font-weight: bold;
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        color: $text-muted;
+        margin-bottom: 2rem;
+        font-size: 0.95rem;
     }
 
     .form-group {
@@ -31,22 +41,29 @@
         label {
             color: $text-muted;
             font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: block;
         }
 
         input {
             width: 100%;
             padding: 12px;
-            margin-top: 5px;
             border-radius: $radius-sm;
-            border: 1px solid transparent;
-            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             color: $text-main;
             outline: none;
             transition: $transition-fast;
 
+            &::placeholder {
+                color: $text-subtle;
+            }
+
             &:focus {
                 border-color: $accent;
-                box-shadow: 0 0 0 3px rgba($accent, 0.2);
+                box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+                background: rgba(255, 255, 255, 0.1);
             }
         }
 
@@ -72,14 +89,17 @@
 
     .btn-login {
         width: 100%;
-        padding: 12px;
+        padding: 14px;
+        margin-top: 1rem;
         background: $accent;
-        color: $text-main;
+        color: #000000;
         border: none;
         border-radius: $radius-sm;
         font-weight: bold;
+        font-size: 1rem;
         cursor: pointer;
         transition: $transition-base;
+        box-shadow: $shadow-sm;
 
         &:hover {
             background: $accent-hover;
@@ -93,7 +113,7 @@
     }
 
     .login-footer {
-        margin-top: 15px;
+        margin-top: 1.5rem;
         color: $text-muted;
         font-size: 0.9rem;
 
@@ -107,5 +127,21 @@
                 color: $accent-hover;
             }
         }
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

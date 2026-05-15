@@ -1,0 +1,110 @@
+<div class="configuracoes-container">
+  <div class="header-main">
+    <div>
+      <h1>Configurações</h1>
+      <p class="subtitle">Gerencie suas preferências e perfil da conta.</p>
+    </div>
+    <button class="btn-novo" (click)="salvarPerfil()">
+      Salvar Alterações
+    </button>
+  </div>
+
+  <div class="settings-grid">
+    <!-- Perfil Section -->
+    <div class="card settings-card">
+      <div class="card-header">
+        <i class="fi fi-rr-user"></i>
+        <h2>Perfil do Usuário</h2>
+      </div>
+      
+      <div class="avatar-section">
+        <div class="avatar-circle">
+          <span>{{ usuario.nome.charAt(0) }}</span>
+        </div>
+        <button class="btn-outline">Mudar Foto</button>
+      </div>
+
+      <div class="form-group-row">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" [value]="usuario.nome" class="input-dark">
+        </div>
+        <div class="form-group">
+          <label>Sobrenome</label>
+          <input type="text" [value]="usuario.sobrenome" class="input-dark">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" [value]="usuario.email" class="input-dark" readonly>
+      </div>
+
+      <div class="form-group">
+        <label>Telefone</label>
+        <input type="text" [value]="usuario.telefone" class="input-dark">
+      </div>
+    </div>
+
+    <!-- Preferências Section -->
+    <div class="settings-column">
+      <div class="card settings-card">
+        <div class="card-header">
+          <i class="fi fi-rr-paint-roller"></i>
+          <h2>Aparência</h2>
+        </div>
+        
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <strong>Tema Escuro</strong>
+            <span>Utilizar o tema padrão Black and White</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked disabled>
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row mt-3">
+          <div class="toggle-info">
+            <strong>Ocultar Saldo Inicialmente</strong>
+            <span>Esconder o saldo e valores ao abrir o app</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="card settings-card mt-3">
+        <div class="card-header">
+          <i class="fi fi-rr-bell"></i>
+          <h2>Notificações</h2>
+        </div>
+        
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <strong>Push Notifications</strong>
+            <span>Receber alertas de transações no celular</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" [checked]="usuario.notificacoesApp">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row mt-3">
+          <div class="toggle-info">
+            <strong>Resumo por E-mail</strong>
+            <span>Receber um resumo semanal na sua caixa de entrada</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" [checked]="usuario.notificacoesEmail">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="seguranca-container">
+  <div class="header-main">
+    <div>
+      <h1>Segurança</h1>
+      <p class="subtitle">Proteja sua conta e gerencie seus acessos.</p>
+    </div>
+  </div>
+
+  <div class="settings-grid">
+    <!-- Autenticação e Senha -->
+    <div class="settings-column">
+      <div class="card settings-card">
+        <div class="card-header">
+          <i class="fi fi-rr-shield-check"></i>
+          <h2>Autenticação e Senha</h2>
+        </div>
+        
+        <div class="security-action">
+          <div class="action-info">
+            <strong>Alterar Senha de Acesso</strong>
+            <span>Última alteração há 3 meses</span>
+          </div>
+          <button class="btn-outline" (click)="mudarSenha()">Alterar</button>
+        </div>
+
+        <hr class="divider">
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <strong>Autenticação em 2 Fatores (2FA)</strong>
+            <span>Mais segurança com código via SMS ou App</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" [checked]="twoFactorEnabled" (change)="toggle2FA()">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dispositivos Conectados -->
+    <div class="settings-column">
+      <div class="card settings-card">
+        <div class="card-header">
+          <i class="fi fi-rr-laptop-mobile"></i>
+          <h2>Dispositivos Conectados</h2>
+        </div>
+        
+        <div class="device-list">
+          <div class="device-item active">
+            <div class="device-icon">
+              <i class="fi fi-rr-computer"></i>
+            </div>
+            <div class="device-info">
+              <strong>MacBook Pro (Este dispositivo)</strong>
+              <span>Chrome - São Paulo, BR</span>
+            </div>
+          </div>
+
+          <div class="device-item">
+            <div class="device-icon">
+              <i class="fi fi-rr-smartphone"></i>
+            </div>
+            <div class="device-info">
+              <strong>iPhone 13 Pro</strong>
+              <span>App PvBanks - São Paulo, BR</span>
+            </div>
+            <button class="btn-disconnect" (click)="desconectar('iPhone 13 Pro')">Desconectar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

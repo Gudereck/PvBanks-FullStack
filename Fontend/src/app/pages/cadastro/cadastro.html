@@ -1,7 +1,7 @@
 <div class="auth-container">
     <div class="auth-card">
         <h2>PvBanks</h2>
-        <p style="color: #888; margin-bottom: 20px;">Crie sua conta gratuita</p>
+        <p class="subtitle">Crie sua conta gratuita</p>
 
         <form (submit)="registrarUsuario()">
             <div class="form-group">
@@ -27,9 +27,10 @@
 
             <button type="submit" class="btn-login">CADASTRAR</button>
 
-            <div style="margin-top: 15px;">
-                <a routerLink="/login" style="color: #ff8a00; text-decoration: none; font-size: 0.9rem;">
-                    Já tenho uma conta. Fazer Login.
+            <div class="auth-footer">
+                <span>Já tenho uma conta. </span>
+                <a routerLink="/login">
+                    Fazer Login.
                 </a>
             </div>
         </form>

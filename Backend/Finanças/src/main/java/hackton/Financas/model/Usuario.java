@@ -19,22 +19,14 @@ public class Usuario {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String senha;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Transacao> transacaos;
 
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public String getEmail() {
-        return email;
-    }
 }
+
+
+

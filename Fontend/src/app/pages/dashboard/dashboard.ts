@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
@@ -7,8 +7,6 @@ import { BaseChartDirective } from 'ng2-charts';
 import { TransacaoService } from '../../services/transacao.service';
 import { ResumoFinanceiro, Transacao } from '../../models/transacao.model';
 import { Chart, ChartConfiguration, ChartData, ChartType, registerables } from 'chart.js';
-import { Header } from '../../components/header/header';
-import { ConfirmModalComponent } from '../../components/confirm-modal/confirm-modal';
 import { ConfirmModalService } from '../../components/confirm-modal/confirm-modal.service';
 
 Chart.register(...registerables);
@@ -16,9 +14,10 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule, BaseChartDirective, FormsModule, Header, ConfirmModalComponent],
+  imports: [CommonModule, RouterModule, BaseChartDirective, FormsModule],
   templateUrl: './dashboard.html',
-  styleUrls: ['./dashboard.scss']
+  styleUrls: ['./dashboard.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DashboardComponent implements OnInit {
   resumo: ResumoFinanceiro = { totalReceitas: 0, totalDespesas: 0, saldoTotal: 0 };
@@ -31,14 +30,20 @@ export class DashboardComponent implements OnInit {
   private router = inject(Router);
   private confirmModal = inject(ConfirmModalService);   // ← novo
 
-  // Configurações do Gráfico
-  public pieChartOptions: ChartConfiguration['options'] = {
+  sidebarOpen = false;
+
+  // Configurações do Gráfico de Barras
+  public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     maintainAspectRatio: false,
-    plugins: { legend: { display: true, position: 'top', labels: { color: '#fff' } } }
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
+      x: { grid: { display: false } }
+    }
   };
-  public pieChartData: ChartData<'pie', number[], string | string[]> = { labels: [], datasets: [{ data: [] }] };
-  public pieChartType: ChartType = 'pie';
+  public barChartData: ChartData<'bar', number[], string | string[]> = { labels: [], datasets: [{ data: [], backgroundColor: '#054841', borderRadius: 4 }] };
+  public barChartType: ChartType = 'bar';
 
   percentualComparativo: number = 0;
   valorDiferenca: number = 0;
@@ -47,6 +52,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.carregarResumo();
     this.carregarTransacoes();
+  }
+
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
   }
 
   carregarTransacoes(): void {
@@ -118,11 +127,12 @@ export class DashboardComponent implements OnInit {
       categorias[cat] = (categorias[cat] || 0) + Math.abs(t.valor);
     });
 
-    this.pieChartData = {
+    this.barChartData = {
       labels: Object.keys(categorias),
       datasets: [{
         data: Object.values(categorias),
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
+        backgroundColor: '#ffffff', // Branco para as barras
+        borderRadius: 4
       }]
     };
   }

@@ -1,0 +1,200 @@
+@use 'styles/variables' as *;
+
+.transacoes-container {
+    padding: 2rem;
+    overflow-y: auto;
+    height: 100%;
+    box-sizing: border-box;
+
+    /* Header */
+    .header-main {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+
+        h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: $text-main;
+        }
+
+        .subtitle {
+            margin: 0.5rem 0 0 0;
+            color: $text-muted;
+            font-size: 0.95rem;
+        }
+
+        .btn-novo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: $radius-full;
+            background: $primary;
+            color: #000000;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: $transition-base;
+
+            &:hover {
+                transform: translateY(-2px);
+                background: $primary-hover;
+            }
+        }
+    }
+
+    /* Filtros */
+    .filtros-card {
+        background: $card-bg;
+        border: 1px solid $card-border;
+        border-radius: $radius-lg;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+
+        .filtros-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .filtro-item {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                font-size: 0.8rem;
+                color: $text-muted;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+
+            .input-dark {
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid $card-border;
+                color: $text-main;
+                padding: 0.75rem 1rem;
+                border-radius: $radius-md;
+                font-size: 0.95rem;
+                outline: none;
+                transition: $transition-base;
+
+                &:focus {
+                    border-color: $primary;
+                    background: rgba(255, 255, 255, 0.1);
+                }
+                
+                option {
+                    background: $bg-surface;
+                    color: $text-main;
+                }
+            }
+        }
+    }
+
+    /* Tabela */
+    .tabela-container {
+        background: $card-bg;
+        border: 1px solid $card-border;
+        border-radius: $radius-lg;
+        padding: 1.5rem;
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+            text-align: left;
+
+            th {
+                color: $text-muted;
+                font-size: 0.75rem;
+                font-weight: 600;
+                padding: 1rem;
+                border-bottom: 2px solid $card-border;
+                text-transform: uppercase;
+            }
+
+            td {
+                padding: 1.2rem 1rem;
+                border-bottom: 1px solid $card-border;
+                color: $text-main;
+                font-size: 0.95rem;
+                vertical-align: middle;
+
+                strong {
+                    font-weight: 600;
+                }
+
+                .tag-categoria {
+                    background: rgba(255, 255, 255, 0.1);
+                    padding: 0.25rem 0.6rem;
+                    border-radius: $radius-full;
+                    font-size: 0.75rem;
+                    color: $text-muted;
+                }
+
+                .badge {
+                    padding: 0.25rem 0.6rem;
+                    border-radius: $radius-sm;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+
+                    &.badge-success {
+                        background: rgba($success, 0.1);
+                        color: $success;
+                    }
+
+                    &.badge-danger {
+                        background: rgba($danger, 0.1);
+                        color: $danger;
+                    }
+                }
+            }
+
+            tbody tr:last-child td {
+                border-bottom: none;
+            }
+
+            tbody tr:hover {
+                background: rgba(255, 255, 255, 0.02);
+            }
+
+            .texto-verde { color: $success; font-weight: 700; }
+            .texto-vermelho { color: $danger; font-weight: 700; }
+            
+            .vazio {
+                color: $text-muted;
+                padding: 3rem 1rem;
+                font-style: italic;
+            }
+
+            .btn-link {
+                background: none;
+                border: none;
+                padding: 0.4rem;
+                cursor: pointer;
+                border-radius: $radius-sm;
+                transition: background 0.2s;
+                margin-right: 0.5rem;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                }
+                
+                &.red:hover {
+                    background: rgba($danger, 0.1);
+                }
+            }
+        }
+    }
+}

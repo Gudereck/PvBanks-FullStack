@@ -1,91 +1,128 @@
 @use 'styles/variables' as *;
 
-/* Estilo Base Dark PvBanks */
-body {
-    margin: 0;
-    background-color: #121212;
-    font-family: 'Inter', sans-serif;
-}
-
-/* Containers de Autenticação (Login/Cadastro) */
 .auth-container {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: radial-gradient(circle at top right, #2d2d2d, #121212);
+    background: radial-gradient(circle at top right, #1a1a1a 0%, $bg-main 100%);
+    animation: fadeIn $transition-base;
 }
 
 .auth-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px); // Efeito Glassmorphism [cite: 615]
+    background: $bg-surface;
+    backdrop-filter: blur(10px);
     padding: 2.5rem;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $radius-lg;
+    border: 1px solid $card-border;
     width: 100%;
     max-width: 400px;
     text-align: center;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
+    box-shadow: $shadow-md;
+    animation: slideUp $transition-base;
 
-/* Inputs com Destaque Laranja */
-.form-group input {
-    width: 100%;
-    padding: 12px;
-    margin-top: 5px;
-    border-radius: 8px;
-    border: none;
-    background: rgba(0, 0, 0, 0.3);
-    color: white;
-    outline: none;
-    transition: border-color 0.3s;
-
-    &:focus {
-        border: 1px solid #ff8a00;
-        /* Cor laranja do botão */
+    h2 {
+        color: $accent;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        font-size: 2rem;
     }
-}
 
-.auth-card h2 {
-    color: #ff8a00;
-    margin-bottom: 1.5rem;
-    font-weight: bold;
-}
+    .subtitle {
+        color: $text-muted;
+        margin-bottom: 2rem;
+        font-size: 0.95rem;
+    }
 
-.form-group {
-    margin-bottom: 1.2rem;
-    text-align: left;
+    .form-group {
+        margin-bottom: 1.2rem;
+        text-align: left;
 
-    label {
-        color: #ccc;
+        label {
+            color: $text-muted;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border-radius: $radius-sm;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: $text-main;
+            outline: none;
+            transition: $transition-fast;
+
+            &::placeholder {
+                color: $text-subtle;
+            }
+
+            &:focus {
+                border-color: $accent;
+                box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+                background: rgba(255, 255, 255, 0.1);
+            }
+        }
+    }
+
+    .btn-login {
+        width: 100%;
+        padding: 14px;
+        margin-top: 1rem;
+        background: $accent;
+        color: #000000;
+        border: none;
+        border-radius: $radius-sm;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: $transition-base;
+        box-shadow: $shadow-sm;
+
+        &:hover {
+            background: $accent-hover;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba($accent, 0.4);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+
+    .auth-footer {
+        margin-top: 1.5rem;
+        color: $text-muted;
         font-size: 0.9rem;
+
+        a {
+            color: $accent;
+            text-decoration: none;
+            font-weight: bold;
+            transition: $transition-fast;
+
+            &:hover {
+                color: $accent-hover;
+            }
+        }
     }
 }
 
-.btn-login {
-    width: 100%;
-    padding: 12px;
-    background: #ff8a00;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-
-    &:hover {
-        background: #e67a00;
-        transform: translateY(-2px);
-    }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-a {
-    color: #ff8a00;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: bold;
-    position: relative;
-    z-index: 10;
-    cursor: pointer;
-    pointer-events: auto !important;
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

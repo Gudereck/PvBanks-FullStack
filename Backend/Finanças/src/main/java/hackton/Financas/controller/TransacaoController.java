@@ -46,8 +46,8 @@ public class TransacaoController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/resumo")
-    public ResumoFinanceiroDTO obterResumo() {
-        return service.obterResumo();
+      @GetMapping("/resumo")
+        public ResponseEntity<ResumoFinanceiroDTO> getResumo(){
+        return ResponseEntity.ok(service.obterResumo());
     }
 }
